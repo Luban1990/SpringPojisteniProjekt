@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="cz" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles/styl.css">
+
+    <title>Seznam Pojištěnců</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<!-- MENU -->
+<div th:replace="fragments/menu :: menu"></div>
+
+<div class="container mt-5 flex-grow-1">
+    <h1 class="text-center">Seznam pojištěnců</h1>
+
+    <!-- Flash zprávy -->
+    <div th:if="${smazano}" class="alert alert-success">
+        <span th:text="${smazano}"></span>
+    </div>
+    <div th:if="${upraveno}" class="alert alert-success">
+        <span th:text="${upraveno}"></span>
+    </div>
+    <div th:if="${pridano}" class="alert alert-success">
+        <span th:text="${pridano}"></span>
+    </div>
+
+    <table class="table table-striped table-bordered mt-4">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Jméno</th>
+            <th>Příjmení</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Ulice</th>
+            <th>Město</th>
+            <th>PSČ</th>
+            <th>Akce</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pojistenec : ${pojistenci}">
+            <td th:text="${pojistenec.id != null ? pojistenec.id : 'Neznámé ID'}"></td>
+            <td th:text="${pojistenec.jmeno}"></td>
+            <td th:text="${pojistenec.prijmeni}"></td>
+            <td th:text="${pojistenec.email}"></td>
+            <td th:text="${pojistenec.telefon}"></td>
+            <td th:text="${pojistenec.ulice}"></td>
+            <td th:text="${pojistenec.mesto}"></td>
+            <td th:text="${pojistenec.psc}"></td>
+            <td>
+                <a th:href="@{/pojistenci/edit/{id}(id=${pojistenec.id})}" class="btn btn-warning btn-sm">Upravit</a>
+                <a th:href="@{/pojistenci/smazat/{id}(id=${pojistenec.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Opravdu chcete smazat tohoto klienta a všechna jeho pojištění?');">
+                    Smazat
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- FOOTER -->
+<div class="mt-auto">
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+</body>
+</html>>

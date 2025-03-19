@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="cz" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles/styl.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Přidat pojištění</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<!-- MENU -->
+<div th:replace="fragments/menu :: menu"></div>
+
+<div class="container mt-5 flex-grow-1">
+    <h1 class="text-center mb-4">Přidání nového pojištění</h1>
+
+    <form th:action="@{/pojisteni/ulozit}" th:object="${pojisteni}" method="post" class="p-4 border rounded bg-light shadow-sm">
+
+        <div class="mb-3">
+            <label class="form-label">Typ pojištění:</label>
+            <select th:field="*{typ}" class="form-control">
+                <option value="">-- Vyberte typ pojištění --</option>
+                <option value="Povinné ručení">Povinné ručení</option>
+                <option value="Cestovní pojištění">Cestovní pojištění</option>
+                <option value="Pojištění na blbost">Pojištění na blbost</option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('typ')}" th:errors="*{typ}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Částka:</label>
+            <input type="number" th:field="*{castka}" class="form-control"/>
+            <small class="text-danger" th:if="${#fields.hasErrors('castka')}" th:errors="*{castka}"></small>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Datum od:</label>
+                <input type="date" th:field="*{datumOd}" class="form-control"/>
+                <small class="text-danger" th:if="${#fields.hasErrors('datumOd')}" th:errors="*{datumOd}"></small>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Datum do:</label>
+                <input type="date" th:field="*{datumDo}" class="form-control"/>
+                <small class="text-danger" th:if="${#fields.hasErrors('datumDo')}" th:errors="*{datumDo}"></small>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Vyberte pojištěnce:</label>
+            <select th:field="*{pojistenecId}" class="form-control">
+                <option value="">-- Vyberte pojištěnce --</option>
+                <option th:each="pojistenec : ${pojistenci}"
+                        th:value="${pojistenec.id}"
+                        th:text="${pojistenec.jmeno + ' ' + pojistenec.prijmeni}">
+                </option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('pojistenecId')}" th:errors="*{pojistenecId}"></small>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Uložit</button>
+    </form>
+
+    <a href="/pojisteni" class="btn btn-secondary mt-3 w-100">Zpět na seznam</a>
+</div>
+
+<!-- FOOTER -->
+<div class="mt-auto">
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+</body>
+</html>

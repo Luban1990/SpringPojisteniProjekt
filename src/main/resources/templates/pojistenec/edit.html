@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="cz"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles/styl.css">
+
+    <title>Editace pojištěnce</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- MENU -->
+<div th:replace="fragments/menu :: menu"></div>
+
+<div class="container mt-5 flex-grow-1">
+    <h1 class="text-center">Upravit pojištěnce</h1>
+
+    <form th:action="@{/pojistenci/edit/{id}(id=${pojistenec.id})}" th:object="${pojistenec}" method="post" class="mt-4 p-4 border rounded bg-light">
+        <div class="mb-3">
+            <label>Jméno:</label>
+            <input type="text" th:field="*{jmeno}" class="form-control" required/>
+            <small class="text-danger" th:if="${#fields.hasErrors('jmeno')}" th:errors="*{jmeno}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label>Příjmení:</label>
+            <input type="text" th:field="*{prijmeni}" class="form-control" required/>
+            <small class="text-danger" th:if="${#fields.hasErrors('prijmeni')}" th:errors="*{prijmeni}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label>Ulice:</label>
+            <input type="text" th:field="*{ulice}" class="form-control" required/>
+            <small class="text-danger" th:if="${#fields.hasErrors('ulice')}" th:errors="*{ulice}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label>Město:</label>
+            <input type="text" th:field="*{mesto}" class="form-control" required/>
+            <small class="text-danger" th:if="${#fields.hasErrors('mesto')}" th:errors="*{mesto}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label>PSČ:</label>
+            <input type="text" th:field="*{psc}" class="form-control" required/>
+            <small class="text-danger" th:if="${#fields.hasErrors('psc')}" th:errors="*{psc}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" class="form-control" required/>
+            <small class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label>Telefon:</label>
+            <input type="text" th:field="*{telefon}" class="form-control" required/>
+            <small class="text-danger" th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}"></small>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Uložit změny</button>
+        <a href="/" class="btn btn-secondary mt-2 w-100">Zpět na seznam</a>
+    </form>
+</div>
+
+<!-- FOOTER -->
+<div class="mt-auto">
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+
+</body>
+</html>
