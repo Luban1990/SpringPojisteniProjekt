@@ -54,11 +54,13 @@ spring.jpa.show-sql=true
 Po spuštění najedeš na http://localhost:8080
 
  Autor
-Lubomír Čipčala
-📍 Ústí nad Orlicí
-📧 cipcala1@gmail.com
-📞 605 916 101
-LinkedIn
+
+## Autor
+
+Lubomír Čipčala  
+📧 cipcala1@gmail.com  
+🌐 [LinkedIn profil](https://www.linkedin.com/in/luboš-cipcala-8484a22b3)
+
 
  Poznámka
 Tento projekt je ukázkou schopností v oblasti Java backend vývoje s použitím Spring Boot frameworku. Nejedná se o produkční aplikaci.
